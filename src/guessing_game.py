@@ -50,11 +50,9 @@ def prompt_for_guess():
             return guess
 
 
-def start_game():
+def play():
     num_guesses = 0
     still_guessing = True
-
-    welcome()
 
     while still_guessing:
         num_guesses += 1
@@ -67,6 +65,11 @@ def start_game():
             print('The number is higher')
         else:
             print('The number is lower')
+
+
+def start_game():
+    welcome()
+    play()
     print('Goodbye\n')
     
 
