@@ -10,12 +10,25 @@ NOTE: If you strongly prefer to work locally on your own computer, you can total
 """
 
 import random
+import sys
 
 
 MIN_GUESS = 1
 MAX_GUESS = 10
-CORRECT_NUM = random.randint(MIN_GUESS, MAX_GUESS)
 
+# checks if the player specifiy a new MAX_GUESS in command line
+# i.e.:     python guessing_game.py 100
+# sets MAX:GUESS to specified value if valid
+if len(sys.argv) > 1:
+    try:
+        new_max = int(sys.argv[1])
+
+        if new_max > 1:
+            MAX_GUESS = new_max
+    except ValueError:
+        pass
+
+CORRECT_NUM = random.randint(MIN_GUESS, MAX_GUESS)
 
 def welcome():
     print('Welcome to the Number Guessing Game!')
