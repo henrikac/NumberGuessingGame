@@ -34,6 +34,12 @@ def welcome():
     print(f'Guess a number between {MIN_GUESS} and {MAX_GUESS}\n')
 
 
+def display_highscore(highscore):
+    if highscore == 0:
+        highscore = '---'
+    print(f'Current highscore: {highscore}\n')
+
+
 def prompt_for_guess():
     while True:
         guess = input('Enter a number: ')
@@ -64,6 +70,7 @@ def play():
             print('The number is higher')
         else:
             print('The number is lower')
+    return num_guesses
 
 
 def play_again():
@@ -73,15 +80,25 @@ def play_again():
     return False
 
 
+def update_highscore(highscore, num_guesses):
+    if highscore == 0 or num_guesses < highscore:
+        return num_guesses
+    return highscore
+
+
 def start_game():
     still_playing = True
+    highscore = 0
 
     while still_playing:
         clear_console()
         welcome()
-        play()
+        display_highscore(highscore)
+        num_guesses = play()
+
         if not play_again():
             still_playing = False
+        highscore = update_highscore(highscore, num_guesses)
     print('Goodbye\n')
     
 
