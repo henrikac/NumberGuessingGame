@@ -15,14 +15,17 @@ MAX_GUESS = 10
 # checks if the player specifiy a new MAX_GUESS in command line
 # i.e.:     python guessing_game.py 100
 # sets MAX:GUESS to specified value if valid
-if len(sys.argv) > 1:
+if len(sys.argv) == 2:
     try:
         new_max = int(sys.argv[1])
 
-        if new_max > 1:
+        if new_max > 10:
             MAX_GUESS = new_max
-    except ValueError:
-        pass
+        else:
+            raise ValueError('The new MAX_GUESS has to be greater than 10')
+    except ValueError as err:
+        print(f'Invalid argument: {err}\n')
+        exit(1)
 
 def clear_console():
     os.system('cls') if os.name == 'nt' else os.system('clear')
