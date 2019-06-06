@@ -28,7 +28,7 @@ if len(sys.argv) == 2:
         exit(1)
 
 def clear_console():
-    os.system('cls') if os.name == 'nt' else os.system('clear')
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 
 def welcome():
