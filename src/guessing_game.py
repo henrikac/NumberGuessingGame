@@ -2,13 +2,9 @@
 Python Web Development Techdegree
 Project 1 - Number Guessing Game
 --------------------------------
-
-For this first project we will be using Workspaces. 
-
-NOTE: If you strongly prefer to work locally on your own computer, you can totally do that by clicking: File -> Download Workspace in the file menu after you fork the snapshot of this workspace.
-
 """
 
+import os
 import random
 import sys
 
@@ -28,7 +24,9 @@ if len(sys.argv) > 1:
     except ValueError:
         pass
 
-CORRECT_NUM = random.randint(MIN_GUESS, MAX_GUESS)
+def clear_console():
+    os.system('cls') if os.name == 'nt' else os.system('clear')
+
 
 def welcome():
     print('Welcome to the Number Guessing Game!')
@@ -51,6 +49,7 @@ def prompt_for_guess():
 
 
 def play():
+    CORRECT_NUM = random.randint(MIN_GUESS, MAX_GUESS)
     num_guesses = 0
     still_guessing = True
 
@@ -67,13 +66,25 @@ def play():
             print('The number is lower')
 
 
+def play_again():
+    play_again = input('\nDo you want to play again ([y]es / [n]o)? ')
+    if play_again.lower() == 'y':
+        return True
+    return False
+
+
 def start_game():
-    welcome()
-    play()
+    still_playing = True
+
+    while still_playing:
+        clear_console()
+        welcome()
+        play()
+        if not play_again():
+            still_playing = False
     print('Goodbye\n')
     
 
 if __name__ == '__main__':
-    # Kick off the program by calling the start_game function.
     start_game()
 
